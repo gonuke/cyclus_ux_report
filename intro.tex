@@ -1,1 +1,151 @@
 \chapter{Introduction}
+
+Interest in \gls{nfcs} by the \gls{USDOE} Office of Nuclear Energy intensified
+in the mid-2000's as a variety of policy issues conveged to prompt a renewed
+interest in advanced nuclear fuel cycles.  Whereas closed fuel cycles have
+always been imagined as a way to extend uranium resources, their ability to
+reduce the burden of radioactive waste management was a new motivation, as was
+the possibility of reducing global proliferation risk by implementating
+international nuclear fuel cycle services.  With a richer set of possible
+benefits, new tools were necessary to provide insight into the degree to which
+different technology options would have an impact on these and other
+socio-political metrics.
+
+The fundamental purpose of a \gls{nfcs} is to track the mass flows and
+isotopic composition of material as it moves among facilities in a complete
+nuclear fuel cycle.  At a minimum, the set of facilities should include
+nuclear reactors for the consumption of uranium and the production of
+transuranics and fission products, but most tools include front-tend
+facilities including mines, enrichment facilities and fuel fabrication
+facilities, as well as back-end facilities including storage and separations.
+As they become more sophisticated, a \gls{nfcs} will also track information
+about facility deployment, utilization and decommissioning, in order to
+support economic assessments that are dominated by the capital costs and
+capacity factors of those facilities.
+
+A variety of such tools emerged, often developed to answer specific
+programmatic questions.  Most notable among these tools were Dymond, DANESS
+and VISION, all initially developed at national laboratories and sharing a
+common heritage.  Although they continue to provide value to the nuclear fuel
+cycle analysis community, a number of limitations were identified in these
+tools, leading to a desire for a \gls{ngfcs}.
+
+One limitation of the previous tools was their reliance on a systems dynamics
+framework.  Such frameworks were attractive because of the graphical
+development environments of stocks and flows that mapped well onto the
+material flow modeling at the core of a \gls{nfcs}.  However, the stock and
+flow paradigm requires all models to be expressed in the context of a
+first-order ODE solved with an Eulerian approach.  Many models are not
+well-suited to this approach and require the implementation of alternative
+methods as extensions to the systems dynamics framework using a more
+traditional programming interface, ths diminishing the value of the graphical
+development environment.  Systems dynamics platforms also suffered from
+limitations on the size of problem they could accommodate, particularly early
+in the development of these tools.  As it became necessary of desirable to
+expand the number of isotopes tracked in material flows and incorporate large
+matrices to represent the long term response of those material flows, limits
+in the total data footprint were reached.  \gls{nfcs} were often the largest
+models to ever be implemented in these platforms and close collaboration with
+their developers led to improvements that relaxed these limits.  The systems
+dynamics platforms were not well-suited to collaborative development because
+it contributions from individual developers could only be merged manually.
+Finally, these platforms required the purchase of commercial licenses for each
+user at each site, both costly and an obstacle to deployment at large scales
+for parametric studies, sensitivity analysis and/or optimization.
+
+Another limitation arose from the problem-focused development path for these
+tools.  Because it was necessary to prioritize particular candidate fuel
+cycles, they each developed depth in their modeling fidelity to support those
+specific fuel cycles and without sufficient modularity to quickly incorporate
+novel technologies.  As policy-driven interest in specific fuel cycles waned,
+these tools became valuable to understand the fuel cycle impact of a variety
+of novel nuclear energy technologies.  Incorporating these technologies in the
+existing tools required a steep learning curve to first learn the particular
+systems dynamics platform and then understand the modeling approaches used to
+incorporate the complexity of real fuel cycles.  This was often beyond the
+scope of many small technology development efforts, especially when crude
+estimates of the steady-state fuel cycle impacts were possible with simple
+spreadsheet models.  At the same, time each of the tools had implemented
+slightly different assumptions and approximations rendering comparison a
+challenge and ultimately undermining confidence in their ability to produce
+reliable results.
+
+Finally, the user experience for these tools was never a focus during their
+development, despite the recognized value in enabling their use by a broader
+set of audiences to improve the communication of their results.  Fuel cycle
+scenarios were defined by data in ever-growing spreadsheets and results stored
+in even bigger spreadsheets.  Visualization of both input and output data was
+generally limited to the spreadsheet software's capabilities.
+
+Therefore, the Fuel Cycle Research & Development program chose to develop a
+\gls{ngfcs} platform with sufficient modularity to accommodate a wide variety
+of audiences, use cases and developer needs. The requirements for this
+framework included the modeling of discrete transactions of materials among a
+set of discrete facilities operating in distinct geographic regions. All
+transactions would arise as the result of resolving a set of offers and
+requests in a market whose transaction costs may be determined by a wide array
+of economic, political and technical parameters. Most importantly, a modular
+“plug-in” architecture would allow user-developers to introduce different
+models with alternative market and facility behaviors, thereby isolating
+variations in modeling to single changes. The fundamental data generated by
+such a framework includes a list of material transactions and the facilities
+involved in such transactions, a history of the isotopic composition of each
+material object, and an operating history for each facility. As additional
+plug-in modules are developed, additional data will be generated related to
+the facility histories, material histories, or market transactions.
+
+The NGFCS was also expected to be a useful evaluation tool for a variety of
+audiences.  Non-technical audiences would interact with the NGFCS in a way
+that allowed them to express critical high-level decisions and understand the
+outcomes of those decisions in a set of key metrics. At the same time, expert
+audiences migh be interested in a quantitative technology assessment to help
+motivate design improvements. Developers of the NGFCS would need to visualize
+their results to ensure consistency and correctness. Given the wide array of
+possible metrics and summaries, each type of user might want to gradually
+explore the results with increasing depth and sophistication. At the same
+time, it was important that the NGFCS allow experts to introduce new modules
+to capture specific physical models or market behavior, but rely on a common
+infrastructure that facilitates direct comparisons of results.
+
+\section{Research Plan Overview}
+
+This project was therefore designed to explore strategies and develop tools to
+enhance the user experience for the next generation fuel cycle simulator for a
+range of target audiences.  The research plan identified five thrusts:
+\begin{enumerate}
+  \item Stakeholder, parameter and metric identification
+  \item User interface and model generation
+  \item Metric translation
+  \item Visualization environment
+  \item Efficient design of a client-server model
+\end{enumerate}
+
+Thrust 1 was led by experts in communication science, and specifically in the
+science of communicating about controversial science.  This critical project
+element was designed to enhance the relevance of the \gls{ngfcs} to a wider
+audience than the traditional nuclear engineering audience of previous tools
+by identifying the metrics that address the questions and conerns of those
+audiences rather than focusing on the metrics that the nuclear engineering
+community values.  This thrust incorporated a thorough review of prior
+testimony and historical documents to identify stakeholders and the issues
+that they raised, interviews with a variety of individuals representing those
+stakeholder groups to further identify the important issues, a survey of a
+larger community of stakeholder to develop a quantitative understanding of how
+those issues were related to each other, and an experiment to understand how
+different forms of visualization would communicate the results of a fuel cycle
+simulation.  A detailed account of the work performed under this thrust is
+found in Chapter \ref{chap:thrust1}.
+
+The primary purpose of Thrust 2 was to develop a convenient graphical
+interface by which users could define the fuel cycle scenarios of interest to
+them.  Inspired by the drag-and-drop promise of the systems dynamics paradigm,
+this interface would allow users to build high-level graphical representation
+of a nuclear fuel cycle by placing and connecting individual facilities.
+Particular consideration would be given to the rules for connecting facilities
+to reduce the depth of nuclear engineering domain knowledge expected of users
+while still preserving a physically valid flow path for material.  The
+interface would expose varying level of detail, with many default values
+hidden from users seeking a simpler experience, but available to those users
+looking to control all parameters.  Each of these parameters would be
+self-documented by the interface allowing users to quickly learn what the
+valid purpose and range of each parameter is.
