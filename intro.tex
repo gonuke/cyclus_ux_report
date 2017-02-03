@@ -77,7 +77,7 @@ scenarios were defined by data in ever-growing spreadsheets and results stored
 in even bigger spreadsheets.  Visualization of both input and output data was
 generally limited to the spreadsheet software's capabilities.
 
-Therefore, the Fuel Cycle Research & Development program chose to develop a
+Therefore, the Fuel Cycle Research \& Development program chose to develop a
 \gls{ngfcs} platform with sufficient modularity to accommodate a wide variety
 of audiences, use cases and developer needs. The requirements for this
 framework included the modeling of discrete transactions of materials among a
@@ -107,7 +107,7 @@ time, it was important that the NGFCS allow experts to introduce new modules
 to capture specific physical models or market behavior, but rely on a common
 infrastructure that facilitates direct comparisons of results.
 
-\section{Research Plan Overview}
+\section{Original Research Plan Overview}
 
 This project was therefore designed to explore strategies and develop tools to
 enhance the user experience for the next generation fuel cycle simulator for a
@@ -148,4 +148,27 @@ interface would expose varying level of detail, with many default values
 hidden from users seeking a simpler experience, but available to those users
 looking to control all parameters.  Each of these parameters would be
 self-documented by the interface allowing users to quickly learn what the
-valid purpose and range of each parameter is.
+valid purpose and range of each parameter is. Chapter \ref{chap:thrust2}
+outlines the development at testing of such an interface.
+
+Thrust 3 focused on translating the fundamental data recorded by the
+\gls{ngfcs} into metrics identified by thrust 1 as of interest to
+stakeholders.  Since the \gls{ngfcs} would operate at the fidelity of discrete
+material objects, perhap individual fuel assemblies, being transacted by
+discrete facilities, a minimum amount of data would be recorded directly in
+its fundamental output.  This data might include, for example, the masses and
+compositions of individual material objects being transacted.  Although some
+applications may be interested in such high-fidelity data, many applications
+would be integrated in integrated quantities such as total flow rates and or
+inventories in the fuel cycle.  Moreover, there may be quantities derived from
+this aggregate data such as decay heats or radiotoxicity.  Finally, given the
+role of modularity and extensibility in the \gls{ngfcs} itself, it is
+important for this metric translation capability to offer similar
+extensibility.  Chapter \ref{chap:thrust3} describes some sample metrics and
+the conceptual framework embodied in an extensible metric translation
+capability.
+
+The ability for user to explore their data in an organic and discovery-driven
+manner was the goal of Thrust 4.  Beyond simply providing simple plots to
+represent the output metrics (identified in Thrust 1 and calculated in Thrust
+3), 
