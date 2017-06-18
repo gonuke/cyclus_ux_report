@@ -1,5 +1,9 @@
 
 SOURCES = report.tex \
+          pkgs.tex \
+          defs.tex \
+          titlepage.tex \
+          exec.tex \
           intro.tex \
           thrust0.tex \
           thrust1.tex \
