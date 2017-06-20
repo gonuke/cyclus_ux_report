@@ -1,8 +1,77 @@
-\chapter{Thrust 3: }\label{chap:thrust3}
+\chapter{Thrust 3: Metric Translation}\label{chap:thrust3}
+
+The standard output of \glspl{nfcs}, in general, consists of material
+inventories and flow, each with a composition that may change over time, and
+possibly facility deployment histories including time varying capacity
+factors.  Most users of these tools, however, are interested in quantities
+that are derived from these fundamental data.  In the simplest case, such as
+decay heat and radiotoxicity, the metrics of interest may be easily derived
+from the material inventories and flows using tabulated data.  In more
+complicated cases, however, it may be necessary to perform more complex
+post-processing.  Many socioeconomic metrics, including economic analysis,
+require this kind of approach.
+
+Thrust 3 was led by Paul Wilson at the University of Wisconsin-Madison, to
+provide a mechanism to translate the fundamental data stored by \Cyclus into
+metrics of interest to a broad set of users.  This thrust was the most
+impacted by the change in scope to include Thrust 0, and only a basic
+demonstration of this capability was accomplished.
+
+Since the output data from \Cyclus is even more obscure than the material
+inventories and flows common in other tools, the first step in this thrust was
+to make that conversion.  With that information availabe, an extensible tool
+was developed that allowed users and analysts to introduced new complex
+metrics by defining their dependency on simpler metrics.  The Cymetric tool,
+described below, supported the automatic resolution of metric dependency all
+the way to the fundamental simulation data.  This thrust also informed a
+handful of metric translations for inclusion in Cyclist as described in
+Chapter \ref{chap:thrust4}.  Finally, some exploratory work for economic
+analysis of transitions was completed using the Cymetric tool.
 
 \section{Fundamental Data}
 
+The fundamental output of \Cyclus is optimized to correspond to the discrete
+data and discrete facility paradigm: a list of material transactions as a
+function of time in which the composition of each material object is stored
+separately in order to reuse compositions where appropriate.  While this
+format leads to more compact output databases from \Cyclus simulations, it is
+not a natural way to analyze fuel cycle performance.
+
+Converting a stream of transactions to inventories and flows is relatively
+straightforward.  Conceptually, each transaction that involves a given
+facility represents a material addition or subtraction to the inventory at
+that facility.  A separate database query is necessary to access to
+composition of that transaction, or possibly multiple compositions if multiple
+discrete objects were traded.  Combining the quantity and composition of each
+object involved in the transaction allows the oveall composition of the
+inventory to be updated.
+
+For some facilities, material objects are created and/or destroyed according
+to the physics models that they represent.  These actions are recorded in
+separate database tables that must also be tallied to get an accurate
+accounting of the inventories in any facility at any point in the simulation.
+
+This capability was implemented in a stand-alone tool known as Cyan.  In
+addition to deriving the time-dependent inventories in each facility, it
+tallied cumulative flows among facilities and can produce graphical
+representations of the fuel cycle indicating the flows of material along the
+commodity arcs between facilities.
+
+After experience with \Cyclus on a number of problems, it became clear that
+the complexity of performing this operation robustly during post-processing
+was overly burdensome compared to the cost of extending the fundamental
+\Cyclus database to contain this information.  An option was added to the
+\Cyclus command-line tool to automatically accummulate the inventories in each
+facility as a function of the simulation time.
+
 \section{Cymetric}
+
+In the spirit of the extensible nature of the \Cyclus ecosystem, the
+post-processing tools were also designed to be extensible.  This extensibility
+is valuable for possible future metrics that are derived from the generic data
+stored in a \Cyclus output database, as well as for metrics that might be
+based on tables that are associated with a particular archetype.
+
 
 \subsection{Derived Metric Framework}
 
