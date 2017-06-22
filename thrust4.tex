@@ -4,17 +4,17 @@ The fidelity and volume of data that can be provided by a discrete facility,
 discrete material object agent-based fuel cycle simulator opens the door for a
 richer visualization experience.  The fundamental transaction data, as
 described in Chapter \ref{chap:thrust3}, can be considered most abstractly as
-the mass of each transaction mapped onto a sparse 5-dimensional domain: time,
-sending facility, receiving facility, material ID, nuclide.  The simplest
-visualizations are formed from filtering this data set on some domains and
-aggregating it on other domains.  For example, the total time-dependent flow
-between two facilities is found by filtering the facility domain with those
-two facilities, and aggregating over the material id and nuclde domains.
-Being able to easily select the filters and aggregrations can enable data
-exploration that may not be natural through more typical spreadsheet based
-data analysis environments.  Additional power can be derived from examining
-different linked visualizations in which the filter and aggregation operations
-on one are reflected on the other.
+the mass of each transaction sparsely mapped onto a five-dimensional domain:
+time, sending facility, receiving facility, material ID, nuclide.  The
+simplest visualizations are formed from filtering this data set on some
+domains and aggregating it on other domains.  For example, the total
+time-dependent flow between two facilities is found by filtering the
+sending/receiving facility domains with those two facilities, and aggregating
+over the material id and nuclide domains.  Being able to easily select the
+filters and aggregations can enable data exploration that may not be natural
+through more typical spreadsheet based data analysis environments.  Additional
+power can be derived from examining different linked visualizations in which
+the filter and aggregation operations on one are reflected on the other.
 
 Thrust 4 was led by Yarden Livnat at the University of Utah, to develop a
 complete visualization environment that can enable a richer data exploration
@@ -85,13 +85,13 @@ if the Y-axis data is being summed over all rows for each X axis point, the
 addition of a grouping field will separate the single sum into multiple sums,
 each associated with a different result in the grouping column.
 
-In a similar fashion, addition fields can be dragged into the title bar of the
-plot to create an opportunity for filtering.  For each field in the filtering
-bar, a new user interface appears that allows the user to select from the
-values in that field.  For fields that represent discrete quantities, the
-filter interface appears as a set of checkboxes and the user can select which
-values are shown or not.  For fields that are represented as continuous
-quantities, the users specifies the maximum and mininum, either with a slider
+In a similar fashion, additional fields can be dragged into the title bar of
+the plot to create an opportunity for filtering.  For each field in the
+filtering bar, a new user interface appears that allows the user to select
+from the values in that field.  For fields that represent discrete quantities,
+the filter interface appears as a set of checkboxes and the user can select
+which values are shown or not.  For fields that are represented as continuous
+quantities, the users specifies the maximum and minimum, either with a slider
 or with text boxes depending on the required precision.  It is possible, but
 not required, for fields to be used for both aggregation and filtering,
 increasing the flexibility of generating plots.
@@ -127,7 +127,7 @@ Since it is possible for many tables to exist in the \Cyclus output database,
 Cyclist shows only a default set of tables in its interface.  There is also a
 mechanism, however, to add any table, including custom tables, to that list.
 Thus, if an archetype developer adds a custom table to the database it is
-still possible to use Cyclist to visualize the data it contains with not
+still possible to use Cyclist to visualize the data it contains with no
 changes to Cyclist.
 
 \section{Custom Visualization: Material Flows}
@@ -154,16 +154,38 @@ on the flow diagram.
   \caption{A flow visualization shows the total flow between different pairs of
     prototypes, aggregating over all agents that share that prototype.  The
     upper pane shows the sender receiver pairs while the lower pane shows the
-    cummulative flow as a function of time.  The quantity shown in the upper
+    cumulative flow as a function of time.  The quantity shown in the upper
     pane is the total flow contained in the window indicated in gray from time
     step 129-179. }
   \label{fig:flow-01-05}
 \end{figure}
 
 Different visual representations of this flow information have been
-conceptualized, including a map-based view in the event of trade among many
-regions, or a graph-based view for representing flows throughout the whole
-fuel cycle.
+conceptualized for future development, including a map-based view in the event
+of trade among many regions, or a graph-based view for representing flows
+throughout the whole fuel cycle.
+
+\section{Limitations}
+
+There were some limitations identified during the development of Cyclist.
+First and foremost, as \Cyclus simulations became more complicated, the volume
+of data began to become an obstacle.  This was true both in terms of accessing
+the database file as well as managing the data in memory.  This is
+particularly true for the operation that builds an inventory table from the
+transaction tables.  Furthermore, there is growing interest in processing
+results for 100's or 1000's of separate but related \Cyclus runs either due to
+parametric sweeps, sensitivity studies, or optimization capability.  The
+current Cyclist infrastructure is not well suited for such applications.
+
+In addition, since the beginning of this project, large investments have been
+made by various third parties in the technology for Javascript-based software.
+Visualization solutions and user interface widgets in Javascript have achieved
+a quality that surpasses the JavaFX version, propelled by rapid development of
+web apps for a variety of computing platforms, particularly mobile.  A new
+project has begun that is expected to replace Cyclist with a Javascript based
+interface and rely more heavily on intermediate computing capability to
+process results before reaching the device that will actually display the
+results.
 
 \section{Summary}
 
@@ -179,22 +201,3 @@ execution (see Chapter \ref{chap:thrust5}) and therefore Cyclist became a
 convenient way to distribute access to \Cyclus without requiring users to
 install it independently.
 
-There were some limitations identified during the development of Cyclist.
-First and foremost, as \Cyclus simulations became more complicated, the volume
-of data began to become an obstacle.  This was true both in terms of accessing
-the database file as well as managing the data in memory.  This is
-particularly true for the operation that builds an inventory table from the
-transaction tables.  Furthermore, there is growing interest in processing
-results for 100's or 1000's of \Cyclus runs either due to parametric sweeps,
-sensitivity studies, or optimization capability.  The current Cyclist
-infrastructure is not well suited for such applications.
-
-In addition, since the beginning of this project, large investments have been
-made by various third parties in the technology for Javascript-based software.
-Visualization solutions and user interface widgets in Javascript have achieved
-a quality that surpasses the Java version, propelled by rapid development of
-web apps for a variety of computing platforms, particularly mobile.  A new
-project has begun that is expected to replace Cyclist with a Javascript based
-interface and rely more heavily on intermediate computing capability to
-process results before reaching the device that will actually display the
-results.
