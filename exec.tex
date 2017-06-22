@@ -1,5 +1,45 @@
 \section*{Executive Summary}
 
-lorus ipsum foo bar
+This project made substantial progress on its original aim for providing a
+modern user experience for nuclear fuel cycle analysis while also creating a
+robust and functional \acrlong{ngfcs}.
+
+The \Cyclus kernel experienced a dramatic clarification of its interfaces and
+data model, becoming a full-fledged agent-based framework, with strong support
+for third party developers of novel archetypes.  The most important
+contribution of this project to the the development of \Cyclus was the
+introduction of tools to facilitate archetype development.  These include
+automated code generation of routine archetype components, metadata
+annotations to provide reflection and rich description of each data member's
+purpose, and mechanisms for input validation and output of complex data.
+
+A comprehensive social science investigation of decision makers' interests in
+nuclear fuel cycles, and specifically their interests in \glspl{nfcs} as tools
+for understanding nuclear fuel cycle options, was conducted.  This included
+document review and analysis, stakeholder interviews, and a survey of decision
+makers.  This information was used to study the role of visualization formats
+and features in communicating information about nuclear fuel cycles.
+
+A flexible and user-friendly tool was developed for building \Cyclus analysis
+models, featuring a drag-and-drop interface and automatic input form
+generation for novel archetypes.  Cycic allows users to design fuel cycles
+from arbitrary collections of facilities for the first time, with mechanisms
+that contribute to consistency within that fuel cycle.  Interacting with some
+of the metadata capabilities introduced in the above-mentioned tools to
+support archetype development, Cycic also automates the generation of user
+input forms for novel archetypes with little to no special knowledge required
+by the archetype developers.
+
+Translation of the fundamental metrics of \Cyclus into more interesting
+quantities is accomplished in the Cymetric python package.  This package is
+specifically designed to support the introduction of new metrics by building
+upon existing metrics.  This concept allows for multiple dependencies and
+encourages building complex metrics out of incremental transformations to
+those prior metrics.  New archetype developers can contribute their own
+archetype-specific metric using the same capability.  A simple demonstration
+of this capability focused on generating time-dependent cash flows for reactor
+deployment that could then be analyzed in different ways.
+
+
 
 
