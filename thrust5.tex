@@ -40,16 +40,16 @@ this mode, many Cloudlus workers are deployed in cloud computing resources and
 register with a single master process that then issues requests to those
 workers. The master can be designed/configured to generate that work in many
 different ways. Cloudlus has been deployed on commercial cloud resources and
-UW-Madison's \gls{HTC} computing system to support large scale optimization.
-In this case, the master implemented an optimization algorithm that relied on
-1000's of independent \Cyclus simulations, with that master automatically
-determining the input file for each simulation based on the results of
-previous simulations.
+UW-Madison's \gls{HTC} computing system to support large scale
+optimization\citeref{chtc}.  In this case, the master implemented an
+optimization algorithm that relied on 1000's of independent \Cyclus
+simulations, with that master automatically determining the input file for
+each simulation based on the results of previous simulations.
 
 This infrastructure has been sufficient, to date, but may not scale well as
 problems become more complex due to the size of the output database.  Storage
 and network transfer of those databases may become a challenge as more complex
 problems result in databases of many gigabytes.  It will continue to be
 sufficient for beginner use through the website or the Cyclist interface, but
-as more robust and scalable replacements for Cyclus emerge, better remote
+as more robust and scalable replacements for Cloudlus emerge, better remote
 execution paradigms are also expected to merge.
