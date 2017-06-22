@@ -1,25 +1,25 @@
 \chapter{Thrust 2: User Interface and Model Generation}\label{chap:thrust2}
 
 With the flexibility afforded by the \Cyclus ecosystem, it is important to
-provide tools for users to describe a novel fuel cycle.  Without \emph{a
-  priori} knowledge of the archetypes that will be used in a simulation, there
-are three main challenges: (a) ensuring that the fuel cycle represents a
-physically valid arrangement of facilities, (b) providing a graphical user
-interface for arbitrary sets of archetype parameters, and (c) allowing for
-different levels of detail as new archtypes are introduced to avoid
-overwhelming the user.
+provide tools that allow users to take advantage of this flexibility while
+describing a novel fuel cycle.  Without \emph{a priori} knowledge of the
+archetypes that will be used in a simulation, there are three main challenges:
+(a) ensuring that the fuel cycle represents a physically valid arrangement of
+facilities, (b) providing a graphical user interface for arbitrary sets of
+archetype parameters, and (c) allowing for different levels of detail as new
+archetypes are introduced to avoid overwhelming the user.
 
-A fundamental requirement of this interface is that it present the design of a
-nuclear fuel cycle as a user function.  Prior \glspl{nfcs} require the
+A fundamental requirement of this interface is that it presents the design of
+a nuclear fuel cycle as a user task.  Prior \glspl{nfcs} require the
 intervention of a developer to introduce novel flows of material between
-facilities and users are left with choices of paramters that may distribute
-material over those flows.  In the \Cyclus ecosystem, the ad-hoc introduction
-of new archetypes can enable new flow paths through the system that should be
-easily realizable as user input.  At the same time, a mechanism must exist to
-prevent or discourage a user from forming fuel cycle flow paths that are not
-physical realistic.  The existing of the \gls{DRE} mitigates some of the
-concern for unrealistic flow paths, while a drag-and-drop interface can be
-implemented to enable the flexible design of fuel cycles.
+facilities and users are left only with choices of parameters that may
+distribute material over those flows.  In the \Cyclus ecosystem, the ad-hoc
+introduction of new archetypes can enable new flow paths through the system
+that should be easily realizable as user input.  At the same time, a mechanism
+must exist to prevent or discourage a user from forming fuel cycle flow paths
+that are not physically realistic.  The existence of the \gls{DRE} mitigates
+some of the concern for unrealistic flow paths, while a drag-and-drop
+interface can be implemented to enable the flexible design of fuel cycles.
 
 Thrust 2, led by Dr. Erich Schneider at the University of Texas - Austin,
 tackled these questions in the development of a user interface for building
@@ -73,12 +73,12 @@ will be described in Chapter \ref{chap:thrust5}.  In this case it connects to
 the remote server and invokes its copy of \Cyclus to query which archetypes
 are available on that server.  This allows users to easily switch to different
 execution servers, including their local computer or any other publicly
-accessible server, and determine what kind of archetypes are available.
+accessible remote server, and determine what kind of archetypes are available.
 
 Once the list of archetypes is discovered, the user interface itself is
 updated.  A drop-down list of all available archetypes is populated with the
 information that is returned from these queries, forming a catalog of possible
-archetypes that a use can choose to include in their model.
+archetypes that a user can choose to include in their model.
 
 \subsection{Drag \& Drop}
 
@@ -96,7 +96,7 @@ and dropping to improve the visual layout of the developing fuel cycle.
 To configure a prototype, a double-click will open a window that contains
 widgets for the input of each parameter that must be defined for that
 archetype, including a name that allows for that prototype to be distinguished
-from other prototypes of the same archetype.  Since Cycic has not prior
+from other prototypes of the same archetype.  Since Cycic has no prior
 knowledge of archetype definitions, this must be generated automatically, as
 described in the next section.
 
@@ -108,7 +108,7 @@ possible to define sets of icons that will be used to represent different
 archetypes and prototypes as they are assigned to specific niches in the fuel
 cycle.
 
-\subsubsection{Automated Input Generation}
+\subsection{Automated Input Generation}
 
 An important feature related to the automated discovery of archetypes is the
 ability to automatically generate graphical user interface capability for each
@@ -116,23 +116,24 @@ archetype.  This functionality relies heavily on the metadata discussed in
 section \ref{sec:metadata}.  Specific metadata annotations have been defined
 for use by the user interface to enable this.  Some of these annotations allow
 the archetype developer to specify strings that will be displayed as part of
-the user interface (e.g. \texttt{alias, uilabel, units, doc, tooltip}), while others
-provide semantic information:
+the user interface as documentation(e.g. \texttt{alias, uilabel, units, doc,
+  tooltip}), while others provide semantic information:
 \begin{itemize}
 \item \textbf{\texttt{type}} describes the C++ implementation of this data
   type and can be used to arrange input widgets in the window for complex data
   types.  For example, if the input quantity is a \texttt{std::map< int key,
-    double value>}, the input can be represented as an extensible lists of pairs of
-  input boxes, in which each pair represents a single key/value pair.
+    double value>}, the input can be represented as a lists of pairs of input
+  boxes, in which each pair represents a single key/value pair, and button to
+  add more pairs as necessary.
 \item \textbf{\texttt{uitype}} provides a hint about how this variable should
-  be displayed for user input.  Many of these indicate that user input for
+  be displayed for user input.  Some of these indicate that user input for
   this variable should be a drop-down list populated by other elements of the
   model: \texttt{incommodity}, \texttt{outcommodity}, \texttt{facility},
-  \texttt{prototype}, etc.  \texttt{combobox} specifies a more generic
+  \texttt{prototype}, \emph{etc}.  \texttt{combobox} specifies a more generic
   drop-down list that will be populated by items specified in the
   \texttt{categorical} metadata, while \texttt{range} specifies that this
   input element should be selected from a continuous variable between the
-  values specfied in the \texttt{range} metadata.
+  values specified in the \texttt{range} metadata.
 \item \textbf{\texttt{range}} provides the valid range for an input quantity,
   allowing archetype developers to ensure that only valid quantities are
   given.
@@ -145,7 +146,7 @@ provide semantic information:
   data, allowing the input widget for this variable to already be populated
   with that value.  The user can still choose to change the value, but
   immediately sees the default.
-\item \textbf{texttt{internal}} indicates that this variable should not appear
+\item \textbf{\texttt{internal}} indicates that this variable should not appear
   in the user input or Cycic interface.  This is reserved for quantities that
   are otherwise stored in the database, but are initialized indirectly from
   other user input quantities or default values.
@@ -165,7 +166,7 @@ user can select their user level, from 0 (simplest) to 10 (most complex), and
 will only see input widgets that correspond to variables with that user level
 or lower.  All variables with a user level greater than 0 must have a default
 value.  This feature allows archetype developers to encode reasonable defaults
-for some variables and only allow users to change those values if they have
+for some variables and only allows users to change those values if they have
 made a conscious decision to access a higher user level.
 
 At this time, the overall design and layout of Cycic does not change with the
@@ -176,56 +177,55 @@ informed by, the different set of input data that users are asked to provide.
 \subsection{Commodity Connections}
 
 Both conceptually and graphically, prototypes are connected in a nuclear fuel
-cycle via the commodities that they share.  A commodity does not have any
-paticular quality/composition in \Cyclus, but serves to define the markets in
-which each agent will participate.  A user gets to decide which prototypes
-will serve as consumers and/or suppliers for each commodity in the problem.
-\Cyclus uses the notion of commodity to partition the \gls{DRE} into smaller
-network flow problems that can be solved indpendently and more efficiently.
-These commodities also result in visual information in the form of arrows that
-connect prototypes in the fuel cycle design canvas.
+cycle via the commodities that they share.  By definition, a commodity does
+not have any particular quality/composition in \Cyclus, but serves to define
+the markets in which each agent will participate.  A user gets to decide which
+prototypes will serve as consumers and/or suppliers for each commodity in the
+problem.  \Cyclus uses the notion of commodity to partition the \gls{DRE} into
+smaller network flow problems that can be solved independently and more
+efficiently.  These commodities also result in visual information in the form
+of arrows that connect prototypes in the fuel cycle design canvas.
 
 In an effort to ensure that the user designs a viable fuel cycle, this
 information also provides hints to the users about the allowable flows of
 material among the prototypes that they are placing into the model.  It is
 important to recognize that these are only hints as it doesn't prevent the
 user from designing a fuel cycle that violates physics.  It is, however, up to
-the agency provided to each facility through its interactions with the
-\gls{DRE} that are assumed to prevent unphysical results from arising.
+the agency defined in each facility's archetype to manage its interactions
+with the \gls{DRE}, and prevent unphysical results from arising.
 
 \subsection{Sample}
 
 Figure \ref{fig:cycic-sample} shows a partially defined fuel cycle that
 includes a mine, an enrichment facility and a reactor, using a set of icons
-based on DOE graphics for fuel cycles\citeref{doereport}.  In this case, the
-available archetypes have been discovered on the remote cyclus execution
+based on \gls{USDOE} graphics for fuel cycles\citeref{doereport}.  In this case, the
+available archetypes have been discovered on the remote \Cyclus execution
 server at the address \texttt{http://cycrun.fuelcycle.org}. The uranium mine,
 enrichment facility and reactor are based on the \texttt{Source},
 \texttt{Enrichment}, \texttt{Reactor} archetypes, respectively, provided by
-the Cycamore library.  At the right is the autogenerated user intput panel, at
-user level 0, for the reactor protoype with the name ``ALWR''.  The commodity
+the \Cycamore library.  At the right is the auto-generated user input panel, at
+user level 0, for the reactor prototype with the name ``ALWR''.  The commodity
 ``U-ore'' is produced by the mine and consumed by the enrichment facility
 while ``Fresh-UOX-Fuel'' is produced by the enrichment facility and consumed
 by the reactor.  Note that this latter commodity does not have a specific
 composition, but that the reactor facility defines a specific recipe,
-``Fresh-UOX-Fuel-4'' that it will request to satsify this commodity need.
+``Fresh-UOX-Fuel-4'' that it will request to satisfy this commodity need.
 
 \begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=\columnwidth]{./images/cycic-sample}
-\caption{A screenshot of the Cycic user interface in the middle of defining a simple fuel cycle.}
-\end{center}
-\label{fig:cycic-sample}
+  \centering
+  \includegraphics[width=\columnwidth]{./images/cycic-sample}
+  \caption{A screenshot of the Cycic user interface in the middle of defining a simple fuel cycle.}
+  \label{fig:cycic-sample}
 \end{figure}
 
-\section{User Efficacy}
+\section{User Experience Testing}
 
 The Thrust 2 team embarked on user experience testing to determine how well
 the implemented design of Cycic met the needs of users working to design
 nuclear fuel cycles.
 
 The first round of testing relied on a group of graduate students in nuclear
-engineering.  The users were given a tutorial consiting of a brief
+engineering.  The users were given a tutorial consisting of a brief
 introduction to the concepts of \Cyclus while demonstrating how they were
 represented in the Cycic user interface.  Most users viewed this tutorial once
 as a group and again individually immediately prior to testing their user
@@ -240,11 +240,11 @@ observer was the amount of time and number of mouse clicks required by the
 user in each step of the task.
 
 Each participant was to construct a simple fuel cycle consisting of three
-prototypes, a source, a reactor and a sink, and add other components necessary
-for a full \Cyclus simulation, an institution and a region.  Following the
-task each participant was asked four questions and invited to make additional
-comments.  These four questions focused on specific contrasts that were
-introduced during the task phase:
+prototypes - a source, a reactor and a sink - and add other components
+necessary for a full \Cyclus simulation: an institution and a region.
+Following the task each participant was asked four questions and invited to
+make additional comments.  These four questions focused on specific contrasts
+that were introduced during the task phase:
 \begin{itemize}
 \item text-based prototype creation vs drag-and-drop
 \item corral view of regions vs text form of institutions
@@ -252,17 +252,17 @@ introduced during the task phase:
 \item the clarity of presenting defaults for advanced user level data
 \end{itemize}
 
-The two principal findings of observations and self-narration were that (a)
-users were confused about the difference/relationship between institutions and
-regions, and (b) the text-based institution view was more challenging to
-understand than the corral-view of the region interface.  While the first of
-these is a core \Cyclus concept and not specific to the user interface, the
-user interface could be modified to explicitly improve this understanding.
-The latter finding suggests that the manipulation of institutions should be
-modified to be more like the region corral view. Two additional, more minor
-findings were that new prototypes should have a default name, rather than no
-name at all, and that a better mode for connecting facilities via commodities
-would be valuable.
+The two principal findings of the observations and self-narration were that
+(a) users were confused about the difference/relationship between institutions
+and regions, and (b) the text-based institution view was more challenging to
+understand than the corral-based view of the region interface.  While the
+first of these is a core \Cyclus concept and not specific to the user
+interface, the user interface could be modified to explicitly support a better
+understanding of the \gls{RIF} hierarchty.  The second finding suggests that
+the manipulation of institutions should be modified to be more like the region
+corral view. Two additional, more minor findings were that new prototypes
+should have a default name, rather than no name at all, and that a better mode
+for connecting facilities via commodities would be valuable.
 
 Regarding the specific follow up questions, the majority of users (10/13)
 preferred the drag-and-drop method for adding prototypes, and some of those
@@ -271,7 +271,7 @@ be preferred for learning a new tool.  Nearly all of the users (12/13)
 preferred the corral view for regions over the text form for institutions.
 All users found the presence of user levels made the tool easier to use,
 reducing clutter and preventing information overload.  All users felt that it
-was clear that values that populated the input widges when the user level was
+was clear that values that populated the input widgets when the user level was
 increased constituted default values.
 
 The software was updated prior to a second round of testing.  Specifically,
@@ -289,19 +289,19 @@ second round.  The task again required users to build a fuel cycle model, but
 this time with more complexity.  The facility prototypes consisted of three
 sources, a fuel fabrication plant, a reprocessing plant, two different
 reactors, and sink.  The institution was configured to build reactors of each
-kind at 3 different points in time.  This more complex scenario was
+kind at three different points in time.  This more complex scenario was
 constructed to provide more time for observation and self-narration.  In
 addition observing the time spent and number of clicks in each view, the
 observer also recorded the number of times that the user switched between two
 open views.
 
-Users (15) were again asked a series of questions following the exercise.  For
-those users who had participated in the previous test, they were aksed to rate
-the changes.  Those users new to Cycic were asked to rate the same features as
-in the first test, as well as the new features represented by the software
-changes.  All participants were asked each view helped to understand \Cyclus
-itself and to rate different widget choices.  Finally, participants were
-solicited for any improvements that they wold recommend.
+Fifteen users were again asked a series of questions following the exercise.
+For those users who had participated in the previous test, they were asked to
+rate the changes.  Those users new to Cycic were asked to rate the same
+features as in the first test, as well as the new features represented by the
+software changes.  All participants were asked how each view helped to
+understand \Cyclus itself and to rate different widget choices.  Finally,
+participants were solicited for any improvements that they wold recommend.
 
 The average time to complete the task was about 20 minutes (range: 16-30
 minutes), nearly 2 times longer than an expert user as represented by the
@@ -324,7 +324,7 @@ questions, much of the feedback of the second round of testing was consistent
 with the first round.  Returning users recognized the improvements in the
 institution view but still considered one of the least clear parts of the
 problem definition.  The addition of tooltips was not well received since the
-quantity of information was deemed too low considering the time for the
+value of information was deemed too low considering the time delay for the
 tooltip to appear.
 
 \section{Summary}

@@ -20,7 +20,7 @@ Under this project, the \Cyclus effort developed into an \textit{ecosystem} comp
 \begin{itemize}
 \item an open source simulation kernel, known as \Cyclus,
 \item many plug-in modules, each implementing a particular model for a
-  facilty, institution or region, and known as \textit{archetypes}, and
+  facility, institution or region, and known as \textit{archetypes}, and
 \item an open source analysis and visualization tool, known as Cyclist.
 \end{itemize}
 
@@ -32,14 +32,14 @@ the infrastructure to support the development of new archetypes.
 
 More details regarding the implementation and demonstration of the fundamental
 design of the \Cyclus kernel are available in ref
-\citeprod{huff-fundamentals}/.
+\citeprod{huff-fundamentals}.
 
 \subsection{Modularity}
 
 The modular nature of \Cyclus is a key element to its ability to remain
 flexible, and also drives many subsequent design decisions.  The main goal of
 this flexibility is to allow for the computational models that represent
-individual agents (see Section \ref{sec:agents}) to be swapped easily, as a
+individual agents (see Section \ref{sec:abm}) to be swapped easily, as a
 user option.  Two specific advantages of this choice are that (a) individual
 researchers can focus their efforts on new modules that match their expertise
 and support their needs, and (b) the impact of changing modeling choices can
@@ -66,22 +66,20 @@ facilitates different distribution modes for these modules, as shown in Figure
 proprietary commercially licensed modules.
 
 \begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=0.7\columnwidth]{./images/framework}
-\caption{The \Cyclus core provides \glspl{API} that abstract away the details in
-the kernel and allow the archetypes to be loaded into the simulation in a modular
-fashion.\cite{huff-fundamentals}}
-\end{center}
-\label{fig:framework}
+  \centering
+  \includegraphics[width=0.7\columnwidth]{./images/framework}
+  \caption{The \Cyclus core provides \glspl{API} that abstract away the details in
+    the kernel and allow the archetypes to be loaded into the simulation in a modular
+    fashion.\cite{huff-fundamentals}}
+  \label{fig:framework}
 \end{figure}
 
 \begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=0.5\columnwidth]{./images/modifiedopen.eps}
-\caption{The \Cyclus framework enables fully open, partially open, and fully
-closed collaborations\cite{carlsen_cyclus_2014}.}
-\end{center}
-\label{fig:modifiedopen}
+  \centering
+  \includegraphics[width=0.5\columnwidth]{./images/modifiedopen.eps}
+  \caption{The \Cyclus framework enables fully open, partially open, and fully
+    closed collaborations\cite{carlsen_cyclus_2014}.}
+  \label{fig:modifiedopen}
 \end{figure}
 
 
@@ -92,8 +90,8 @@ closed collaborations\cite{carlsen_cyclus_2014}.}
 % describe Region/Institution/Facility hierarchy
 % note importance of generic resource exchange paradigm
 
-\Cyclus implements an \acrlong{ABM} paradigm.  In addition to being a natural
-consquence of the modularity described above, the \gls{ABM} paradigm is more
+\Cyclus implements an \gls{ABM} paradigm.  In addition to being a natural
+consequence of the modularity described above, the \gls{ABM} paradigm is more
 flexible and intuitive (from both a developer and user perspective) than the
 system dynamic approach used in current simulators.  System dynamics is a
 popular approach for modeling nuclear fuel cycles
@@ -110,7 +108,7 @@ how they interact with other agents and with the environment.  These
 \glspl{API} standardize and simplify the implementation of required agent
 behavior such as trading resources.  Optional \textit{mixins} are also
 provided in a toolkit to provide community standards for some optional
-behaviors.  More details on archetype development are in section
+behaviors.  More details on archetype development are in Section
 \ref{sec:archetypes}.
 
 \Cyclus provides a novel representation of entities in the nuclear fuel cycle
@@ -124,7 +122,7 @@ swapped at runtime.  \Cyclus implements a \gls{RIF} relationship through a
 parent-child hierarchy where regions are the parents of institutions which
 are, in turn, the parents of facilities.  In this structure, institutions are
 typically responsible for making decisions to deploy and decommissioning
-faciltiies, while regions are typically responsible for establishing an energy
+facilities, while regions are typically responsible for establishing an energy
 demand.  Both regions and institutions can have an impact on inter-facility
 resource flow during the resource exchange process.
 
@@ -136,14 +134,14 @@ resource flow during the resource exchange process.
 
 Implied by this \gls{ABM} paradigm is that \Cyclus models facilities,
 institutions, regions, and resources as discrete objects, allowing for a range
-of modeling granularity.  This is in contrast the the fleet-based approach
-used in most other fuel cycle simulators, although it is possible to implement
-\Cyclus archetypes that represent fleets of identically behaving facilities.
-This discrete facility capability is necessary to enable the tracking of
-discrete material objects.  Examples of use cases supported by discrete
-material tracking include spent fuel storage, transport and disposal models
-that require representation of discrete casks and the individual isotopic
-compositions of their contents.
+of modeling granularity.  This is in contrast to the fleet-based approach used
+in most other fuel cycle simulators, although it is possible to implement
+\Cyclus archetypes that represent fleets of identically behaving
+facilities\citeprod{carlsen_fleet}.  This discrete facility capability is
+necessary to enable the tracking of discrete material objects.  Examples of
+use cases supported by discrete material tracking include spent fuel storage,
+transport and disposal models that require representation of discrete casks
+and the individual isotopic compositions of their contents.
 
 Another such use case seeks to capture system vulnerability to material
 diversion. Provenance and trade-history of distinct materials is the
@@ -156,9 +154,10 @@ facilities and materials should be discretely modeled objects like those in
 \Cyclus represents these discrete tradable objects generically as
 \textit{resources}, with a specific implementation for \textit{materials} to
 represent typical nuclear materials with a mass and nuclide composition.
-Typical operations on material objects, e.g. splitting, combining, decay, etc,
-are tracked in detail to support simulation wide conservation.  The history of
-ownership and transfer of each object is also tracked.
+Typical operations on material objects, e.g. splitting, combining, decay,
+\emph{etc.}, are tracked in detail to support simulation wide mass
+conservation.  The history of ownership and transfer of each object is also
+tracked.
 
 Material objects in \Cyclus can have compositions with an arbitrary number of
 nuclides and can be optionally subject to radioactive decay, either at the
@@ -208,11 +207,14 @@ As of version 1.5, \Cycamore contains one region archetype, two institution
 archetypes, and eight facility archetypes. Short descriptions of these functions can be found in
 Table \ref{tab:cycamore}.
 
-\begin{table*}[htb]
+\begin{table*}[ht]
 \centering
+\caption{The Archetypes in \Cycamore seek to cover a large range of simple
+simulation use cases \cite{carlsen_cycamore_2014}.}
+\label{tab:cycamore}
 \begin{tabularx}{\textwidth}{rlX}
 \hline
-\textbf{Entity} & \textbf{Archetype} & \textbf{Functionality} \\
+\textbf{Type} & \textbf{Archetype Name} & \textbf{Functionality} \\
 \hline
 Facility & EnrichmentFacility & This facility enriches uranium at a specified capacity. \\
 Facility & FuelFab & This facility fabricates fuel material based on separated streams. \\
@@ -227,9 +229,6 @@ Institution & DeployInst &  This institution deploys specific facilities as defi
 Region & GrowthRegion & This region determines whether there is a need to meet a certain capacity (as defined via input) at each time step. \\
 \hline
 \end{tabularx}
-\caption{The Archetypes in \Cycamore seek to cover a large range of simple
-simulation use cases \cite{carlsen_cycamore_2014}.}
-\label{tab:cycamore}
 \end{table*}
 
 In addition to the core functionality of the \Cyclus kernel, which is focused
@@ -238,9 +237,9 @@ on the set of capabilities needed to implement an agent-based simulation with
 and standardized implementations of related simulation and nuclear engineering
 tasks. The toolkit is an actively developed part of \Cyclus, with a primarily
 forward-looking focus on supporting interesting \textit{in situ} metric
-analysis tools.  The toolkit contains methods to support demand-constrined
+analysis tools.  The toolkit contains methods to support demand-constrained
 facility agent deployment with methods that describe different shaped curves
-for electricty demand, and then assess the available capacity relative to
+for electricity demand, and then assess the available capacity relative to
 those demand curves, deploying new facilities when necessary.  The toolkit
 also includes nuclear engineering specific methods, such as models to
 calculate the relationship between material quantity, quality and enrichment
@@ -260,19 +259,21 @@ ensuring software quality including:
   software with full attribution of each change to each author,
 \item code review: every individual change is reviewed by another developer
   for many aspects, from style to algorithmic performance to correctness, and
-\item continuous integration: automated testing of indivdual software units
+\item continuous integration: automated testing of individual software units
   and integrated solutions as each change is proposed and incorporated.
 \end{itemize}
+Ref \citeprod{huff-fundamentals} provides more details on each of these topics.
 
 
 \section{Facilitating Archetype Developers} %% Archetype paper
+\label{sec:archetypes}
 
 A principal distinguishing feature of \Cyclus is the ability to introduce
 novel agents by developing customized archetypes.  Not only is this a
-departure from the structure of most nuclear fuel cycle simulation tools, but
+departure from the structure of most \gls{nfcs} tools, but
 the degree of specialization that is necessary to represent different fuel
 cycle facilities is a departure from many agent-based simulation frameworks.
-Each agent must iteract with the \Cyclus kernel and other agents using a rich
+Each agent must interact with the \Cyclus kernel and other agents using a rich
 interface that controls initialization of agent parameters, agent interaction
 with the \gls{DRE}, initiation of agent behavior between trades,
 decommissioning of agents, and recording of all agent data.  Correct
@@ -281,7 +282,7 @@ addition to implementing the physics and interaction behaviors that are the
 true motivation for the new agent archetype.
 
 To mitigate the difficulties of writing archetypes, \Cyclus aids in overcoming
-the hurdle of interfacing with kernel itself. Additionally, to the extent
+the hurdle of interfacing with the kernel itself. Additionally, to the extent
 possible, \Cyclus should also provide tools that ease the implementation of
 the physics and desired behavior.  A variety of strategies are used by \Cyclus
 to ease archetype development:
@@ -290,12 +291,12 @@ to ease archetype development:
 \item \textbf{Automatic Model Templating:} By automatically inspecting and
   creating portions of archetypes, the overhead of adhering to the \Cyclus
   \gls{API} is removed. This is performed via preprocessing archetypes and
-  then automatically generating the necessary code to implement many parts of
-  the necessary interface.
+  then automatically generating the necessary C++ source code to implement
+  many parts of the necessary interface.
 
 \item \textbf{Data Communication Protocol:} \Cyclus provides a common basis
   for archetypes to store and retrieve complex data in its database. This is
-  achevied through the implementation of \Cyclus-specific type system.  This
+  achieved through the implementation of \Cyclus-specific type system.  This
   alleviates the need for archetype developers to invent and implement custom
   solutions for storing the data that is generated by the archetype.
 
@@ -304,16 +305,15 @@ to ease archetype development:
   archetype developers to communicate relevant information to tools outside of
   \Cyclus (such as a visualization tool).
 
-\item \textbf{Input Validation:} \Cyclus uses an \gls{XML} input file system
+\item \textbf{Input Validation:} \Cyclus uses an \gls{XML} input file format
   because it allows for a the definition of a schema that can be used to
   automatically validate the input file.  The schema for each archetype is
   automatically generated by the \Cyclus tools, relieving the developer of
-  this burden while still allowing them to ensure users of their archetye are
-  using it correctly.
+  this burden while still allowing them to impose automatic validation.
 
 \item \textbf{Model Location:} \Cyclus has a packaging system for archetypes
   and libraries of archetypes. This provides a standard mechanism for
-  searching for and locating models on a users system.  Furthermore, all
+  searching for and locating models on a user's system.  Furthermore, all
   archetype developers can uniquely specify their own archetypes without the
   fear of overlapping names.  For example, two developers could each have a
   \texttt{Reactor} archetype, but they would exist in different packages and
@@ -340,20 +340,21 @@ functions that allow an archetype to take specific action when it is deployed
 decommission its own children (\texttt{BuildNotify},\texttt{DecomNotify}), or
 when it is decommissioned itself (\texttt{Decommission}).
 
-Since each archetype is free to define a unique and indepndent set of member
+Since each archetype is free to define a unique and independent set of member
 data and behaviors, these methods must be specific to the archetype so that
 they can be sure to address all the correct data members.  Manually generating
-all of these functions is tedious, time consuming, error prone, and my require
-specialized knowledge of the \Cyclus kernel that would be otherwise
-unnecessary.  It is, however, possible to automatically generate the code
-that implements the above functions based on the set of members that are
-defined in the archetype.  Furthermore, with a small amount of additional
-metadata for each member variable, it is also possible to define the correct
-\gls{XML} schema for validation of input to that archetype.
+all of these functions is tedious, time consuming, error prone, and may
+require specialized knowledge of the \Cyclus kernel that would be otherwise
+unnecessary.  It is, however, possible to automatically generate the code that
+implements the above functions based on the set of members that are defined in
+the archetype.  Furthermore, with a small amount of additional metadata (see
+Section \ref{sec:metadata} below) for each member variable, it is also
+possible to automatically generate the correct \gls{XML} schema for validation
+of input to that archetype.
 
-A custom preprocessor, called \texttt{cycpp}, has been written to read and
+A custom pre-processor, called \texttt{cycpp}, has been written to read and
 parse the simplified definition of an archetype and automatically generate the
-correct methods to implement the above interface.  The preprocessor replies on
+correct methods to implement the above interface.  The pre-processor replies on
 metadata that is attributed to the member data through the use of
 \texttt{\#pragma cyclus} directives.  These are otherwise skipped by the
 compiler, but can be used to identify special behavior.
@@ -399,7 +400,7 @@ including declaring a default value, different forms of documentation, and
 physical units.  Use of this data will be discussed further in Chapter
 \ref{chap:thrust3}.
 
-\subsection{Validation}
+\subsection{Input Validation}
 
 A \Cyclus input file consists largely of the definition of agent
 \textit{prototype}, each formed by configuring an archetype with a set of
@@ -421,7 +422,7 @@ can be derived by inspecting the type and structure of the member variables
 themselves.  Grammar that validates against specific semantic meanings (e.g. a
 variable must be positive) requires metadata annotations.  The metadata
 annotations also provide a mechanism for developers to completely override the
-autogeneration of the schema.
+auto-generation of the schema.
 
 \subsection{Model Location}\label{sec:model_location}
 
@@ -430,11 +431,11 @@ declare the location of a specific archetype.  Since archetypes are
 dynamically loadable, it is necessary for the \Cyclus kernel to find each
 archetype at runtime.  The simplest strategies for finding archetypes rely on
 them all being named in a standard way in a standard location in the
-filesystem.  This is both constraining and presumes a level of coordination
+file system.  This is both constraining and presumes a level of coordination
 among archetype developers that undermines the flexibility of the plugin
 archetypes.  Instead, an archetype specification mechanism has been developed
 to allow both flexibility and disambiguation of archetypes at runtime.  The
-specification allows a user to define where in the filesystem a plugin library
+specification allows a user to define where in the file system a plugin library
 is located, the name of that library, and the name of the archetype within
 that library.  This means that different developers can choose the same name
 for their library of archetypes, as long as it is stored in a different
