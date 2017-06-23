@@ -26,14 +26,14 @@ analysis.  This became a key component to providing platform-independent
 access to \Cyclus when coupled with the Cyclist tool for model building and
 data visualization.
 
-Cloudlus is a lightweight wrapper, written in the Go programming
-language\citeref{go}, that listens on an internet port for tasks, performs
-those tasks by launching a \Cyclus simulation, and then serves the output
-database on the same internet port.  Cloudlus has been deployed continuously
-since 2014 as the mechanism for users to submit \Cyclus jobs through the
-website, www.fuelcycle.org.  The same Cloudlus service is available to users
-of Cyclist as a remote execution service as described briefly in Section
-\ref{sec:cyclist_remote}.
+Cloudlus\citeprod{carlsen_cloudlus_2014} is a lightweight wrapper, written in
+the Go programming language, that listens on an internet port for tasks,
+performs those tasks by launching a \Cyclus simulation, and then serves the
+output database on the same internet port.  Cloudlus has been deployed
+continuously since 2014 as the mechanism for users to submit \Cyclus jobs
+through the website, www.fuelcycle.org.  The same Cloudlus service is
+available to users of Cyclist as a remote execution service as described
+briefly in Chapters \ref{chap:thrust2} and \ref{chap:thrust4}.
 
 Cloudlus also supports a mode for large scale deployment and analysis.  In
 this mode, many Cloudlus workers are deployed in cloud computing resources and

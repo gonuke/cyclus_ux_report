@@ -68,17 +68,20 @@ proprietary commercially licensed modules.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.7\columnwidth]{./images/framework}
-  \caption{The \Cyclus core provides \glspl{API} that abstract away the details in
+  \caption[The \Cyclus core provides \glspl{API} that abstract away the details in
     the kernel and allow the archetypes to be loaded into the simulation in a modular
-    fashion.\cite{huff-fundamentals}}
+    fashion.]{The \Cyclus core provides \glspl{API} that abstract away the details in
+    the kernel and allow the archetypes to be loaded into the simulation in a modular
+    fashion. \citeprod{huff-fundamentals}}
   \label{fig:framework}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.5\columnwidth]{./images/modifiedopen.eps}
-  \caption{The \Cyclus framework enables fully open, partially open, and fully
-    closed collaborations\cite{carlsen_cyclus_2014}.}
+  \caption[The \Cyclus framework enables fully open, partially open, and fully
+    closed collaborations.]{The \Cyclus framework enables fully open, partially open, and fully
+    closed collaborations\citeprod{carlsen_cyclus_2014}.}
   \label{fig:modifiedopen}
 \end{figure}
 
@@ -95,9 +98,9 @@ consequence of the modularity described above, the \gls{ABM} paradigm is more
 flexible and intuitive (from both a developer and user perspective) than the
 system dynamic approach used in current simulators.  System dynamics is a
 popular approach for modeling nuclear fuel cycles
-\cite{jacobson_vision_2009,van_den_durpel_daness_2009,guerin_impact_2009,guerin_benchmark_2009}.
+\citeref{jacobson_vision_2009,van_den_durpel_daness_2009,guerin_impact_2009,guerin_benchmark_2009}.
 Formally however, system dynamics models are simply a strict subset of
-agent-based models \cite{macal_agent-based_2010}.  That is, any system
+agent-based models \citeref{macal_agent-based_2010}.  That is, any system
 dynamics model can be translated into an agent-based model.  \gls{ABM}
 techniques therefore enable a broader range of simulations in a more generic
 fashion.
@@ -171,11 +174,11 @@ A critical capability at the intersection of the swappable archetype and the
 discrete resource object paradigms is the \gls{DRE} which implements a market
 mechanism at each time step for matching consumer agents' requests for
 material with supplier agents' offers for material.  The \gls{DRE} is
-described in detail in Ref \cite{gidden_agent-based_2015}.  Supporting the
+described in detail in Ref \citeref{gidden_agent-based_2015}.  Supporting the
 general \Cyclus philosophy, facilities are treated as black boxes and a
 supply-demand communication framework is defined.  The primary development of
 the \gls{DRE} was supported under a different project and is reported
-there\cite{cyclus-opt-report}.
+there\citeref{cyclus-opt-report}.
 
 The \gls{DRE} is a novel simulation concept in the nuclear fuel cycle domain. It
 provides a flexible supply-demand infrastructure, supporting dynamic flows of
@@ -193,7 +196,7 @@ archetypes and a toolkit of commonly needed functions.  The \Cycamore library
 provides a suite of fundamental Region, Institution, and Facility archetypes,
 while the \Cyclus toolkit provides assistance to developers.
 
-\Cycamore \cite{carlsen_cycamore_2014}, the \Cyclus additional module
+\Cycamore \citeprod{carlsen_cycamore_2014}, the \Cyclus additional module
 repository, provides a fundamental set of dynamically loadable libraries
 providing agent archetypes for basic simulation
 functionality within \Cyclus.  Since \Cyclus relies on external
@@ -209,8 +212,9 @@ Table \ref{tab:cycamore}.
 
 \begin{table*}[ht]
 \centering
-\caption{The Archetypes in \Cycamore seek to cover a large range of simple
-simulation use cases \cite{carlsen_cycamore_2014}.}
+\caption[The Archetypes in \Cycamore seek to cover a large range of simple
+simulation use cases.]{The Archetypes in \Cycamore seek to cover a large range of simple
+simulation use cases\citeprod{carlsen_cycamore_2014}.}
 \label{tab:cycamore}
 \begin{tabularx}{\textwidth}{rlX}
 \hline
@@ -327,7 +331,7 @@ archetypes. The following subsections present greater detail regarding these
 strategies.
 
 \subsection{Automatic Model Templating}
-\label{subsec-ppgc}
+\label{sec:code_gen}
 
 Every \Cyclus archetype is required to implement a standard set of member
 functions that control the definition of a prototype that is derived from that

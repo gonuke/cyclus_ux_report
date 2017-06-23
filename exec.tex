@@ -40,6 +40,33 @@ archetype-specific metric using the same capability.  A simple demonstration
 of this capability focused on generating time-dependent cash flows for reactor
 deployment that could then be analyzed in different ways.
 
+Cyclist, a dedicated application for exploration of \Cyclus results, was
+developed.  It's primary capabilities at this stage are best-suited to
+experienced fuel cycle analysts, but it provides a basic platform for simpler
+visualizations for other audiences.  An important part of its interface is the
+ability to fluidly examine different slices of what is fundamentally a
+five-dimensional sparse data set.  A drag-and-drop interface simplifies the
+process of selecting which data is displayed in the plot as well as which
+dimensions are being used for grouping/aggregation and filtering.  A
+purpose-built visualization was created to display flows between different
+groupings of agents and interrogate those flows over time.
 
+A remote, cloud-based execution capability, known as Cloudlus, was developed
+and deployed for multiple purposes.  A primary motivation of was to enable
+client-server operation, thus making \Cyclus available on a wider variety of
+platforms.  Since the Cyclist user interface was written in Java, it could run
+on any desktop platform and use a network connection to run the simulation on
+a cloud server.  This facilitated distribution to a wider audience and
+prototyped the technology necessary for support of mobile/tablet operation.
+This capability also proved to be valuable for large scale automated analysis,
+in which a master process submitted work to hundreds of Cloudlus execution
+nodes for optimization work.
 
+Although the various thrusts of this project never achieved as tight
+integration as was originally intended, important progress was made - and
+insights gained - in each thrust.  Changes in project scope required
+refocusing on fewer stakeholder groups and undermined the ability to develop
+an improved user experience for a wide variety of audiences.  This is still
+an interesting extension of this work that can possibly be pursued in the
+future.
 

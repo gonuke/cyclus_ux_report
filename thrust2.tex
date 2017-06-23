@@ -198,18 +198,19 @@ with the \gls{DRE}, and prevent unphysical results from arising.
 
 Figure \ref{fig:cycic-sample} shows a partially defined fuel cycle that
 includes a mine, an enrichment facility and a reactor, using a set of icons
-based on \gls{USDOE} graphics for fuel cycles\citeref{doereport}.  In this case, the
-available archetypes have been discovered on the remote \Cyclus execution
-server at the address \texttt{http://cycrun.fuelcycle.org}. The uranium mine,
-enrichment facility and reactor are based on the \texttt{Source},
-\texttt{Enrichment}, \texttt{Reactor} archetypes, respectively, provided by
-the \Cycamore library.  At the right is the auto-generated user input panel, at
-user level 0, for the reactor prototype with the name ``ALWR''.  The commodity
-``U-ore'' is produced by the mine and consumed by the enrichment facility
-while ``Fresh-UOX-Fuel'' is produced by the enrichment facility and consumed
-by the reactor.  Note that this latter commodity does not have a specific
-composition, but that the reactor facility defines a specific recipe,
-``Fresh-UOX-Fuel-4'' that it will request to satisfy this commodity need.
+based on \gls{USDOE} graphics for fuel cycles\citeref{dixon_dynamic_2008}.  In
+this case, the available archetypes have been discovered on the remote \Cyclus
+execution server at the address \texttt{http://cycrun.fuelcycle.org}. The
+uranium mine, enrichment facility and reactor are based on the
+\texttt{Source}, \texttt{Enrichment}, \texttt{Reactor} archetypes,
+respectively, provided by the \Cycamore library.  At the right is the
+auto-generated user input panel, at user level 0, for the reactor prototype
+with the name ``ALWR''.  The commodity ``U-ore'' is produced by the mine and
+consumed by the enrichment facility while ``Fresh-UOX-Fuel'' is produced by
+the enrichment facility and consumed by the reactor.  Note that this latter
+commodity does not have a specific composition, but that the reactor facility
+defines a specific recipe, ``Fresh-UOX-Fuel-4'' that it will request to
+satisfy this commodity need.
 
 \begin{figure}[htbp]
   \centering

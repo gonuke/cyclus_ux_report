@@ -52,11 +52,11 @@ the simulation. In summary, each material object is tracked from its creation
 to its destruction, adding or subtracting it from the inventory of the
 appropriate facility as each operation and transaction occurs.
 
-This capability was implemented in a stand-alone tool known as Cyan.  In
-addition to deriving the time-dependent inventories in each facility, it
-tallied cumulative flows among facilities and can produce graphical
-representations of the fuel cycle indicating the flows of material along the
-commodity arcs between facilities.
+This capability was implemented in a stand-alone tool known as
+Cyan\citeprod{carlsen_cyan_2014}.  In addition to deriving the time-dependent
+inventories in each facility, it tallied cumulative flows among facilities and
+can produce graphical representations of the fuel cycle indicating the flows
+of material along the commodity arcs between facilities.
 
 After experience with \Cyclus on a number of problems, it became clear that
 the complexity of performing this operation robustly during post-processing
@@ -78,7 +78,7 @@ from the original database tables.  Python was chosen for this tool, known as
 Cymetric, because of the flexibility it would allow for using its
 capabilities: as a command-line tool for performing small operations on a
 database, as a module to be included in scripts for batch processing of
-databases, or using Jupyter\citeref{jupyter} notebooks for more interactive
+databases, or using Jupyter notebooks for more interactive
 exploration of data.  These different modes imply different levels of user
 sophistication.  The interactive mode is best employed by sophisticated Python
 users, but could result in packaged scripts that could be used by less
@@ -88,7 +88,7 @@ results.
 With similar concepts to the automatic code generation discussed in section
 \ref{sec:code_gen}, Cymetric provides streamlined capability for defining new
 metrics based on previously defined metrics using the Pandas data analysis
-framework\citeref{pandas}.  The fundamental data structure, known as a
+framework.  The fundamental data structure, known as a
 dataframe, is a table in which each row represents a record of related data.
 Pandas provides compact mechanisms to perform complex operations on such data
 tables.
