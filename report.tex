@@ -8,8 +8,11 @@
 \input{titlepage}
 \input{exec}
 \tableofcontents
-\listoftables
 \listoffigures
+\begingroup
+\let\clearpage\relax
+\listoftables
+\endgroup
 \input{intro}
 \input{thrust0}
 \input{thrust1}

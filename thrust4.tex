@@ -112,12 +112,13 @@ the X-axis, this serves to zoom in the plot to those 60 time steps.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\columnwidth]{./images/plot-01-07}
-  \caption{A typical plot showing the quantity of material inventory at each
-    point in time.  This case shows the application of a SUM operation to the
-    Y-axis data, grouping of the results by Prototype and Nuclide, and
+  \caption[Material invetory plot from Cyclist showing aggregation and
+    filtering.]{A typical plot showing the quantity of material inventory at
+    each point in time.  This case shows the application of a SUM operation to
+    the Y-axis data, grouping of the results by Prototype and Nuclide, and
     subsequent filtering by Prototype, Nuclide and Time.  Since Time is a
-    continuous variable, the user interface for this filter is different.  Since
-    Time is the X-axis variable, its filter is applied differently.  }
+    continuous variable, the user interface for this filter is different.
+    Since Time is the X-axis variable, its filter is applied differently.  }
   \label{fig:plot-01-07}
 \end{figure}
 
@@ -151,7 +152,8 @@ on the flow diagram.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\columnwidth]{./images/flow-01-05}
-  \caption{A flow visualization shows the total flow between different pairs of
+  \caption[Flow visualization from Cyclist between pairs of prototypes.]{A
+    flow visualization shows the total flow between different pairs of
     prototypes, aggregating over all agents that share that prototype.  The
     upper pane shows the sender receiver pairs while the lower pane shows the
     cumulative flow as a function of time.  The quantity shown in the upper
